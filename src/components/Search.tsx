@@ -1,3 +1,4 @@
+import './Search.css'
 interface Props{
     searchText:string,
      handleSearchTextChange:(e:React.ChangeEvent<HTMLInputElement>)=>void, 

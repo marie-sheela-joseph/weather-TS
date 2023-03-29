@@ -1,0 +1,7 @@
+th,td{
+    border-bottom: 1px solid blue;
+    text-align: left;
+}
+table{
+    margin-top: 3rem;
+}

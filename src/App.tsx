@@ -2,17 +2,21 @@ import React from 'react';
 import './App.css';
 import Search from './components/Search';
 import { useState } from 'react';
+import DisplayWeather from './components/DisplayWeather';
 
 interface IState{
   searchText:string,
-  cityData:{},
-  weatherData:{}
+  cityData:{name:'',state:'',country:''},
+  weatherData:{main:{feels_like:'',humidity:'',temp:'',temp_max:'',temp_min:''},
+              wind:{speed:''}
+            }
 }
 function App() {
   const [state, setState] = useState<IState>({
     searchText: '',
-    cityData: {},
-    weatherData: {}
+    cityData:{name:'',state:'',country:''},
+    weatherData:{main:{feels_like:'',humidity:'',temp:'',temp_max:'',temp_min:''},
+  wind:{speed:''}}
   })
   function handleSearchTextChange(e:React.ChangeEvent<HTMLInputElement>) {
     setState((prevState) => {
@@ -38,14 +42,37 @@ function App() {
     setState((prevState) => { return { ...prevState, searchText: '' } })
   }
   return (
-    <div>
-      <h1>React</h1>
-      <Search
-      searchText={state.searchText}
-      handleSearchTextChange={handleSearchTextChange}
-      handleSearchSubmit={handleSearchSubmit}
-      />
-    </div>
+    <>
+    <header>
+      <div className="container">
+        <h1>WEATHER</h1>
+      </div>
+    </header>
+    <section className="main">
+      <div className="container">
+        <div className="d-flex">
+          <div>
+            <Search
+              searchText={state.searchText}
+              handleSearchTextChange={handleSearchTextChange}
+              handleSearchSubmit={handleSearchSubmit}
+            />
+            <DisplayWeather
+              city={state.cityData.name}
+              state={state.cityData.state}
+              country={state.cityData.country}
+              feelsLike={state.weatherData.main?.feels_like}
+              humidity={state.weatherData.main?.humidity}
+              temp={state.weatherData.main?.temp}
+              tempMin={state.weatherData.main?.temp_max}
+              tempMax={state.weatherData.main?.temp_min}
+              windSpeed={state.weatherData.wind?.speed}              
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </>
   );
 }
 
