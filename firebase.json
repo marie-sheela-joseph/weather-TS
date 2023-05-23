@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "weather-ts-sheela",
     "public": "build",
     "ignore": [
       "firebase.json",
